@@ -1,0 +1,8 @@
+name = "pickme-complaint-ai-chatbot"
+compatibility_date = "2024-01-01"
+
+[env.production]
+vars = { }
+
+[[env.production.kv_namespaces]]
+binding = "KV"
