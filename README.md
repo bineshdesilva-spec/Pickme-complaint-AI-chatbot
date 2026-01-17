@@ -3,7 +3,7 @@
 AI-powered multilingual customer support chatbot for PickMe Facebook page.
 
 ## Features
-- 🤖 AI-powered responses using Google Gemini
+- 🤖 AI-powered responses using Claude
 - 🌍 Multilingual support (English, Sinhala, Tamil)
 - 📱 Mobile-responsive design
 - ⚡ Real-time chat interface
