@@ -31,7 +31,7 @@ git push -u origin main
    - **Build output directory**: `/`
 5. Click **Save and Deploy**
 
-### Step 3: Add API Key - Claude
+### Step 3: Add API Key
 1. Go to your project settings
 2. **Environment variables** → **Add variable**
 3. Name: `ANTHROPIC_API_KEY`
