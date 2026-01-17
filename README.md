@@ -34,8 +34,8 @@ git push -u origin main
 ### Step 3: Add API Key
 1. Go to your project settings
 2. **Environment variables** → **Add variable**
-3. Name: `GEMINI_API_KEY`
-4. Value: Your API key from https://makersuite.google.com/app/apikey
+3. Name: `ANTHROPIC_API_KEY`
+4. Value: Your API key from [https://makersuite.google.com/app/apikey](https://platform.claude.com/dashboard)
 5. Click **Save**
 6. Redeploy your project
 
