@@ -1,28 +1,14 @@
-export async function onRequest(context) {
-  // Handle CORS preflight
-  if (context.request.method === 'OPTIONS') {
-    return new Response(null, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      }
-    });
-  }
-
-  if (context.request.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), { 
-      status: 405,
-      headers: { 'Content-Type': 'application/json' }
-    });
-  }
-
+export async function onRequestPost(context) {
   try {
     const { message, history, knowledgeBase } = await context.request.json();
     
+    // Try multiple ways to access the API key
     const apiKey = context.env.GEMINI_API_KEY;
     
+    console.log('API Key exists:', !!apiKey); // Debug log
+    
     if (!apiKey) {
+      console.error('GEMINI_API_KEY not found in environment');
       return new Response(JSON.stringify({ 
         error: 'API key not configured',
         text: '⚠️ Configuration error. Please add GEMINI_API_KEY environment variable.'
@@ -72,6 +58,8 @@ ${knowledgeBase}`
     );
 
     if (!response.ok) {
+      const errorData = await response.text();
+      console.error('Gemini API error:', response.status, errorData);
       throw new Error(`Gemini API error: ${response.status}`);
     }
 
@@ -98,4 +86,15 @@ ${knowledgeBase}`
       }
     });
   }
+}
+
+// Keep the OPTIONS handler separate
+export async function onRequestOptions() {
+  return new Response(null, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    }
+  });
 }
