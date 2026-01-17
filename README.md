@@ -42,8 +42,8 @@ git push -u origin main
 ### Step 4: Test
 Your app will be live at: `your-project.pages.dev`
 
-## Get Gemini API Key
-1. Visit: https://makersuite.google.com/app/apikey
+## GetClaude API Key
+1. Visit: [https://makersuite.google.com/app/apikey](https://platform.claude.com/dashboard)
 2. Click "Create API Key"
 3. Copy and add to Cloudflare environment variables
 
