@@ -2,16 +2,12 @@ export async function onRequestPost(context) {
   try {
     const { message, history, knowledgeBase } = await context.request.json();
     
-    // Try multiple ways to access the API key
+    // Access environment variable from Cloudflare Pages
     const apiKey = context.env.GEMINI_API_KEY;
     
-    console.log('API Key exists:', !!apiKey); // Debug log
-    
     if (!apiKey) {
-      console.error('GEMINI_API_KEY not found in environment');
       return new Response(JSON.stringify({ 
-        error: 'API key not configured',
-        text: '⚠️ Configuration error. Please add GEMINI_API_KEY environment variable.'
+        text: '⚠️ API key not configured. Please contact support at 1331.'
       }), {
         status: 500,
         headers: { 
@@ -58,8 +54,6 @@ ${knowledgeBase}`
     );
 
     if (!response.ok) {
-      const errorData = await response.text();
-      console.error('Gemini API error:', response.status, errorData);
       throw new Error(`Gemini API error: ${response.status}`);
     }
 
@@ -74,9 +68,7 @@ ${knowledgeBase}`
     });
     
   } catch (error) {
-    console.error('Chat API Error:', error);
     return new Response(JSON.stringify({ 
-      error: error.message,
       text: "I'm having trouble connecting. Please call 1331 for immediate help."
     }), {
       status: 500,
@@ -88,7 +80,6 @@ ${knowledgeBase}`
   }
 }
 
-// Keep the OPTIONS handler separate
 export async function onRequestOptions() {
   return new Response(null, {
     headers: {
